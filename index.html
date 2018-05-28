@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<script src="js/knockout.js"></script>
+<script src="js/koikoi.js?v=2"></script>
+<link rel="stylesheet" href="css/main.css"/>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<fieldset>
+    <legend>Game Info</legend>
+<div>Month: <select data-bind="value: currentMonth, options: Object.keys(months), optionsText: function(key) { return months[key]; }"></select></div>
+    <br />
+    <table>
+        <tr><th data-bind="text: playerNames[1]"></th><td data-bind="text: playerPoints[1]"></td></tr>
+        <tr><th data-bind="text: playerNames[2]"></th><td data-bind="text: playerPoints[2]"></td></tr>
+    </table>
+</fieldset>
+
+<fieldset>
+    <legend>Common Yaku</legend>
+    <label><input type="checkbox" data-bind="checked: calledKoi"/> Opponent called 'Koi' </label>
+    <label><input type="checkbox" style="visibility: hidden;" /> Brights <select data-bind="value: brights"><option value="0">None</option><option value="3">Three</option><option value="4r">Three + Rain Man</option><option value="4">Four</option><option value="5">Five</option></select></label>
+    <label><input data-bind="checked: inoShikaCho" type="checkbox" /> InoShikaCho + <input type="number" data-bind="value: additionalAnimals" max="7"/> animals</label>
+    <label><input type="checkbox" data-bind="checked: animals" /> 5 Animals  + <input type="number" data-bind="value: additionalAnimals" max="5"/> more</label>
+    <label><input type="checkbox" data-bind="checked: poetryRibbons"/> Poetry Ribbons  + <input type="number" data-bind="value: additionalRibbons" max="8"/> ribbons</label>
+    <label><input type="checkbox" data-bind="checked: blueRibbons" /> Blue Ribbons + <input type="number" data-bind="value: additionalRibbons" max="8"/> ribbons</label>
+    <label><input type="checkbox" data-bind="checked: ribbons" /> 5 Ribbons  + <input type="number" data-bind="value: additionalRibbons" max="6"/> more</label>
+    <label><input type="checkbox" data-bind="checked: dregs"/> 10 Plains  + <input type="number" data-bind="value: additionalDregs" max="14"/> more</label>
+</fieldset>
+
+<fieldset>
+    <legend>Uncommon Yaku</legend>
+    <label><input type="checkbox" data-bind="checked: hasMonth"/> 4 of $month$ </label>
+    <label><input type="checkbox" data-bind="checked: hanami"/> Flower Viewing </label>
+    <label><input type="checkbox" data-bind="checked: tsukimi"/> Moon Viewing </label>
+    <label><input type="checkbox" data-bind="checked: wonFromHand"/> Month in Hand or four pair </label>
+    <label><input type="checkbox" data-bind="checked: nobodyWon"/> Nobody won </label>
+</fieldset>
+
+<fieldset data-bind="visible: gameSettings[scoringMethod()].rainyDayPenalty">
+    <legend>Variant Variables</legend>
+    <label><input type="checkbox" data-bind="checked: hasRainman" /> Has Rainman</label>
+    <label><input type="checkbox" data-bind="checked: hasThunderstorm" /> Has Thunderstorm</label>
+</fieldset>
+
+<fieldset>
+    <legend>Award</legend>
+    Award <span data-bind="text: points"></span> points to <select data-bind="value: awardingPointsTo">
+    <option value="1" data-bind="text: playerNames[1]"></option>
+    <option value="2" data-bind="text: playerNames[2]"></option>
+</select>
+    <button type="button" data-bind="click: awardPoints">Award Points</button>
+</fieldset>
+
+<fieldset>
+    <legend>Game Settings</legend>
+    <label>Player Name: <input data-bind="value: playerNames[1]" /></label>
+    <label>Player Name: <input data-bind="value: playerNames[2]" /></label>
+    <label>Scoring Method: <select data-bind="options: scoringMethods, optionsText: scoringMethodsText, value: scoringMethod"></select></label>
+    <br /><button type="button" data-bind="click: function() { confirm('Are you sure?') ? resetGame() : null; }">New Game</button>
+</fieldset>
+
+<script>ko.applyBindings(KoiKoi);</script>
+

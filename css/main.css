@@ -1,0 +1,6 @@
+label { display: block; }
+table th, table td { border: 1px solid gray; min-width: 30px; text-align: right;  padding-right: 5px; }
+table { margin: 5px; border-collapse: collapse; min-width: 20%; }
+input[type=number] { width: 30px; text-align: right; padding-right: 5px; }
+fieldset { margin-bottom: 10px; }
+
